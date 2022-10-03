@@ -9,6 +9,8 @@ you have to login to specific database
 
 create role devAdmin;
 
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO fahim;
+
 ALTER USER username CREATEDB;
 
 username tonmoy
