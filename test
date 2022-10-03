@@ -1,0 +1,35 @@
+\du => all users
+
+\l => list of database
+
+
+\?
+
+you have to login to specific database
+
+create role devAdmin;
+
+username tonmoy
+pass tonmoyDeepChain
+
+tonmoy@deepchainlabs.com
+
+psql -d reflectiondb --host=182.48.89.206  --port=5432 --username=tonmoy --password
+
+GRANT CONNECT ON DATABASE reflectiondb TO devAdmin;
+GRANT USAGE ON SCHEMA public TO devAdmin;
+GRANT USAGE ON SCHEMA web3api TO devAdmin;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO devAdmin;
+
+GRANT ALL ON ALL TABLES IN SCHEMA web3api TO devAdmin;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO devAdmin;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE SELECT ON TABLES FROM devAdmin;
+ALTER DEFAULT PRIVILEGES IN SCHEMA web3api GRANT ALL ON TABLES TO devAdmin;
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public REVOKE SELECT ON TABLES FROM devAdmin;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT SELECT ON TABLES TO devAdmin;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA web3api GRANT ALL ON TABLES TO devAdmin;
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO devAdmin;
+GRANT SELECT ON SELECT TABLES IN SCHEMA public TO devAdmin;
