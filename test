@@ -37,3 +37,11 @@ ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA web3api GRANT ALL ON TABLES
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO devAdmin;
 GRANT SELECT ON SELECT TABLES IN SCHEMA public TO devAdmin;
+
+
+PGPASSWORD=pass1234 psql -U MyUsername myDatabaseName
+
+$ psql postgresql://[user[:password]@][host][:port][,...][/dbname][?param1=value1&...]
+
+
+
