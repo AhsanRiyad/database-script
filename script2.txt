@@ -1,0 +1,22 @@
+CREATE USER web3apiDevUser WITH LOGIN CREATEDB INHERIT PASSWORD 'HCoHIZIbAmpIZdj';
+
+ALTER USER web3apiDevUser WITH LOGIN;
+
+psql --host=dev-ng-rds-1.cvrthm2bgjbn.us-east-1.rds.amazonaws.com  --port=5432 --username=web3apidevuser --password
+
+psql --host=dev-ng-rds-1.cvrthm2bgjbn.us-east-1.rds.amazonaws.com  --port=5432 --username=web3apidevuser --password
+
+
+psql --host=dev-ng-rds-1.cvrthm2bgjbn.us-east-1.rds.amazonaws.com -d web3api  --port=5432 --username=web3apidevuser --password
+HCoHIZIbAmpIZdj
+
+ALTER USER web3apidevuser WITH PASSWORD 'HCoHIZIbAmpIZdj';
+
+
+psql --host=dev-ng-rds-1.cvrthm2bgjbn.us-east-1.rds.amazonaws.com --port=5432 --username=postgres --password
+ONCKId9QMMO97Es
+
+
+ALTER ROLE web3dev(roleName) WITH CREATEDB(permission name);
+
+GRANT web3dev(roleName) TO web3apidevuser(userName);
