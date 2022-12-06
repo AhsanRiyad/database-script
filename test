@@ -43,5 +43,12 @@ PGPASSWORD=pass1234 psql -U MyUsername myDatabaseName
 
 $ psql postgresql://[user[:password]@][host][:port][,...][/dbname][?param1=value1&...]
 
+show schema
+select schema_name from information_schema.schemata;
 
 
+create database
+create database test;
+
+create schema
+create schema if not exists test AUTHORIZATION username
