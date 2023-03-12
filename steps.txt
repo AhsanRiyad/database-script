@@ -1,0 +1,35 @@
+=> step 1
+login to superuser
+$ psql -d <database_name> --host=<hostname>  --port=<port> --username=<username> --password
+$ psql -d postgres --host=localhost  --port=5432 --username=postgres --password
+
+=> step 2
+create a user 
+$ CREATE USER <username> WITH PASSWORD '<password>;
+$ CREATE USER geolocation WITH PASSWORD 'geolocation';
+
+=> step 3
+give CREATEDB permission to the user
+$ ALTER USER <username> CREATEDB;
+$ ALTER USER geolocation CREATEDB;
+
+=> step 4
+create a database with same name as username 
+$ CREATE DATABASE <database_name>;
+$ CREATE DATABASE geolocation;
+
+=> step 5
+grant the user connect to the database
+$ GRANT CONNECT ON DATABASE <database_name> TO <username>;
+$ GRANT CONNECT ON DATABASE geolocation TO geolocation;
+
+change the owner 
+$ ALTER DATABASE <database_name> OWNER TO <owner_user_name>;
+$ ALTER DATABASE geolocation OWNER TO geolocation;
+
+=> step 6
+login to the user
+$ psql -d <database_name> --host=<hostname>  --port=<port> --username=<username> --password
+$ psql -d geolocation --host=localhost  --port=5432 --username=geolocation --password
+
+
