@@ -32,4 +32,6 @@ login to the user
 $ psql -d <database_name> --host=<hostname>  --port=<port> --username=<username> --password
 $ psql -d geolocation --host=localhost  --port=5432 --username=geolocation --password
 
-
+=> step 7
+change database password of other user
+ALTER USER riyad WITH PASSWORD 'riyad@dcl@2025';
