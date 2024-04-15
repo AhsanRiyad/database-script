@@ -1,0 +1,190 @@
+version: '3.7'
+services:
+  pgsql-db:
+    image: postgres:14.4
+    restart: always
+    container_name: pgsql-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=DeepchainLabs4754hhjkk0324023
+      - POSTGRES_DB=DeepchainLabs8680f4374db6
+      - TZ=Asia/Dhaka
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pgsql:/var/lib/postgresql/data
+#    network_mode: "host"
+    networks:
+      - app-network
+
+#   pgsql-db-nftvast-prod:
+#     image: postgres:14.4
+#     restart: always
+#     container_name: pgsql-db-nftvast-prod
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=DeepchainLabsnftvast8680f4374ededd23
+#       - POSTGRES_DB=DeepchainLabsnftvast8680f4374db6
+#       - TZ=Asia/Dhaka
+#     ports:
+#       - 5436:5432
+#     volumes:
+#       - ./pgsql-db-nftvast-prod:/var/lib/postgresql/data
+# #    network_mode: "host"
+#     networks:
+#       - app-network
+
+#   pgsql-db-internal-tracker-prod:
+#     image: postgres:14.4
+#     restart: always
+#     container_name: pgsql-db-internal-tracker-prod
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=DeepchainLabsInternalTracker24345gfghh
+#       - POSTGRES_DB=DeepchainLabsInternalTracker65372819374234
+#       - TZ=Asia/Dhaka
+#     ports:
+#       - 5435:5432
+#     volumes:
+#       - ./pgsql-internal-tracker-prod:/var/lib/postgresql/data
+# #    network_mode: "host"
+#     networks:
+#       - app-network
+
+#   pgsql-db-discord-bot:
+#     image: postgres:14.4
+#     restart: always
+#     container_name: pgsql-db-discord-bot
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=DeepchainLabsdiscordbotede1343bbyA
+#       - POSTGRES_DB=DeepchainLabsnftvast8680f4374db6
+#       - TZ=Asia/Dhaka
+#     ports:
+#       - 5437:5432
+#     volumes:
+#       - ./pgsql-db-discord-bot:/var/lib/postgresql/data
+# #    network_mode: "host"
+#     networks:
+#       - app-network
+   
+#   pgsql-db-old:
+#     image: postgres:14.4
+#     restart: always
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=DeepchainLabs8680f4374db62022
+#       - POSTGRES_DB=DeepchainLabs8680f4374db6
+#       - TZ=Asia/Dhaka
+#     ports:
+#       - 5431:5432
+#     volumes:
+#       - ./pgsql-old:/var/lib/postgresql/data
+# #    network_mode: "host"
+#     networks:
+#       - app-network
+
+
+
+  pgadmin:
+    image: dpage/pgadmin4:6.12
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@deepchainlabs.com
+      PGADMIN_DEFAULT_PASSWORD: DeepchainLabsPROD234365789987
+      PGADMIN_LISTEN_PORT: 5050
+      MAX_LOGIN_ATTEMPTS: 20
+      TZ: Asia/Dhaka
+    ports:
+     - "5050:5050"
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+#      - ./pgadmin:/pgadmin4/config.py
+    #   - ./pgadmin/certs/server.cert:/certs/server.cert
+#      - ./pgadmin/pgadmin4/:/pgadmin4/
+#      - ./pgadmin/pgadmin4/config.py:/pgadmin4/config.py
+#    network_mode: "host"
+    networks:
+      - app-network
+
+  # dbeaver:
+  #   image: dbeaver/cloudbeaver:latest
+  #   restart: always
+  #   environment:
+  #     TZ: Asia/Dhaka
+  #   ports:
+  #    - "8985:8978"
+  #   volumes:
+  #     - ./var/cloudbeaver/workspace:/opt/cloudbeaver/workspace
+  #   networks:
+  #     - app-network
+
+
+  mysql:
+    image: mysql:5.7  # Using MySQL 5.7
+    container_name: mysql-deepchainlabs
+    environment:
+      MYSQL_DATABASE: deepchainlabs
+      MYSQL_USER: deepchainlabs
+      MYSQL_PASSWORD: dcl@2025
+      MYSQL_ROOT_PASSWORD: dclMySqlRoot  # Specify a root password
+    ports:
+      - "3306:3306"  # Map port 3306 inside the container to 13306 on the host
+    networks:
+      - app-network
+    restart: always
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin-deepchainlabs    
+    restart: always
+    ports:
+      - 13307:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - app-network
+
+    # in pgsql, host will be: mysql-deepchainlabs
+    #             username: deepchainlabs
+    #             database: deepchainlabs
+    #             password: dcl@2025
+
+# docker exec -it mysql-deepchainlabs bash
+# mysql -h mysql-deepchainlabs -p 3306 -u deepchainlabs -p
+# mysql -u deepchainlabs -p
+# CREATE DATABASE database_name;
+# DROP DATABASE database_name;
+
+
+# CREATE USER 'new_user'@'%' IDENTIFIED BY 'password';
+# GRANT CREATE ON *.* TO 'new_user'@'%';
+# GRANT ALL PRIVILEGES ON `new_user_db`.* TO 'new_user'@'%';
+# FLUSH PRIVILEGES;
+# EXIT;
+
+# CREATE USER 'alkalam'@'%' IDENTIFIED BY 'alkalam';
+# GRANT CREATE ON *.* TO 'alkalam'@'%';
+# GRANT ALL PRIVILEGES ON `ojs`.* TO 'alkalam'@'%';
+# FLUSH PRIVILEGES;
+# EXIT;
+
+# user: alkalam
+# password: alkalam
+# database: ojs
+
+
+
+
+#Docker Networks
+# docker network create app-network
+networks:
+  app-network:
+    driver: bridge
+    external: true
+#Volumes
+volumes:
+  dbdata:
+    driver: local
